@@ -40,7 +40,7 @@ Results are saved in a csv file. The value of each term of the continued fractio
 | 7.47474910.E+01| 
 
 ## Download
-The programs (.edp) can be run on FreeFEM. 
+The programs (.edp) can be run by FreeFEM. 
 
 ## Reference
 S. Hiruma and H. Igarashi, "Homogenization Method Based on Cauer Circuit via Unit Cell Approach," in IEEE Transactions on Magnetics, vol. 56, no. 2, pp. 1-5, Feb. 2020, Art no. 7505805, doi: 10.1109/TMAG.2019.2946402.
