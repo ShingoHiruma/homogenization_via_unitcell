@@ -30,7 +30,7 @@ $$N=\int_\Omega \sigma N_iN_jd\Omega,$$
 $$(\textbf{c})_i=\nu w \int \frac{dN_i}{dx}d\Gamma $$
 w is the half-width of the unit cell, and $N_i$ is the interpolation function of the i-th node.
 
-Applying the CVL method [1] to the transfer function at the denominator of the complex permeability, we obtain
+Applying the CVL method [1] to the transfer function of the denominator of the complex permeability, we obtain
 $$\langle\dot\mu\rangle=\frac{1}{\frac{1}{\kappa_1}+\frac{1}{\frac{1}{j\omega\kappa_2} + \frac{1}{\frac{1}{\kappa_3}+\frac{1}{\ddots}}}}$$
 
 
