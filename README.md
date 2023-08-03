@@ -44,7 +44,7 @@ real k = 0.5;
 real radius = width*k;
 ```
 ## Data
-Results are saved in a CSV file. The values of each term of the continued fraction are given as float data in the CSV file. The following figure shows the frequency dependence of the complex permeability, which is calculated from the obtained values of the continued fraction.
+Results are saved in a CSV file. The values of each term of the continued fraction are given as float data in the CSV file. The following figure shows the frequency dependence of the relative complex permeability, which is calculated from the obtained values of the continued fraction.
 
 | Values  |
 | ------------- | 
