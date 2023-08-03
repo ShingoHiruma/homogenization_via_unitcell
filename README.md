@@ -8,10 +8,16 @@ We have implemented the following cases.
 - Round wire
 - Rectangular conductor
 
-## Mathematics
-Let us consider the uniform time-harmonic external magnetic flux density $B_0$ interlinkage across the unit cell $\Omega$. The complex permeability $\langle\dot\mu\rangle$ of the unit cell can be evaluated using
+## Physics
+Let us consider the uniform time-harmonic external magnetic flux density $B_0$ interlinkage across the unit cell $\Omega$. The complex permeability $\langle\dot\mu\rangle$ of the unit cell can be evaluated using the following formula:
 $$\langle\dot\mu\rangle=\frac{-j\omega\int_\Omega |B_0|^2dS}{-j\omega\int_\Omega \nu |\textbf{B}|^2 dS + \int_\Omega \sigma|\textbf{E}|dS}$$
-where 
+where $j,\omega,\nu,\sigma$ are the imaginary unit, angular frequency, magnetic reluctivity, and the conductivity of the conductive material in the unit cell.
 
+Using the Galerkin method, the governing equation and the complex permeability can be represented in the discretized forms as follows:
+$$(K+sN)\textbf{x}=\textbf{b}B_0$$
+$$\langle\dot\mu\rangle=\frac{\int_\Omega dS}{\textbf{c}^\top(K+sN)^{-1}\textbf{b}}$$
+
+Applying the CVL method to the transfer function at the denominator of the complex permeability, we obtain
+$$\langle\dot\mu\rangle=\frac{1}{\frac{1}{\kappa_1}+\frac{1}{\frac{1}{j\omega\kappa_2} + \frac{1}{\frac{1}{\kappa_3}+\frac{1}{\ddots}}}}$$
 ## Download
 The programs (.edp) can be run on FreeFEM. 
