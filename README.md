@@ -33,7 +33,7 @@ $$\langle\dot\mu\rangle=\frac{1}{\frac{1}{\kappa_1}+\frac{1}{\frac{1}{j\omega\ka
 </p>
 
 ## How to use?
-You can change the geometry by editing the edp file.
+You can change the geometry of the conductor and the size of the unit cell by editing the edp file.
 ```
 // Parameters
 real sigma = 5.76e7;
