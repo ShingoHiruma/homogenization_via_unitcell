@@ -9,7 +9,7 @@ We have implemented the following cases.
 - Rectangular conductor
 
 ## Download
-[FreeFEM](https://freefem.org/) needs to be installed as a preliminary preparation. After installation, double-click the program file to run it.
+[FreeFEM](https://freefem.org/) needs to be installed as a preliminary preparation. After installation, double-click the edp file to run it.
 
 ## Physics
 Let us consider the uniform time-harmonic external magnetic flux density $B_0$ interlinkage across the unit cell $\Omega$. The complex permeability $\langle\dot\mu\rangle$ of the unit cell can be evaluated using the following formula:
