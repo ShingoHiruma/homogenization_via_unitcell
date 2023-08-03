@@ -1,4 +1,4 @@
-# unitcell_homogenization
+# Homogenization via unit cell approach
 ## Description
 The unit cell approach is an effective way to obtain the complex permeability of the composite materials, which can be used in the finite element (FE) analysis of electromagnetic devices. 
 In this repository, we implemented the Cauer circuit via the Lancoz (CVL) method to obtain the complex permeability in the form of the continued fraction using FreeFEM.
@@ -29,15 +29,15 @@ $$\langle\dot\mu\rangle=\frac{1}{\frac{1}{\kappa_1}+\frac{1}{\frac{1}{j\omega\ka
 Results are saved in a csv file. The value of each term of the continued fraction is given as float data in the csv file. The following figure shows how the real and imaginary parts of the complex permeability change against the frequencies.
 | Values  |
 | ------------- | 
-| 1| 
-| 8.88E-09| 
-| 2.895351372| 
-| 3.82E-10| 
-| 12.88462042| 
-| 5.37E-11| 
-| 35.20912196| 
-| 1.31E-11| 
-| 74.74749095| 
+| 1.00000000.E+00| 
+| 8.88230863.E-09| 
+| 2.89535137.E+00| 
+| 3.82237771.E-10| 
+| 1.28846204.E+01| 
+| 5.37494620.E-11| 
+| 3.52091220.E+01| 
+| 1.30581154.E-11| 
+| 7.47474910.E+01| 
 
 ## Download
 The programs (.edp) can be run on FreeFEM. 
