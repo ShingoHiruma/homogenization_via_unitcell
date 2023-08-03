@@ -11,7 +11,7 @@ In this repository, we implemented the Cauer circuit via the Lancoz (CVL) method
 ## Features
 - Obtaining the complex permeability in the form of a continued fraction
 - Applicable to the round wire, rectangular conductor, and arbitrarily shaped conductor
-- Plotting the complex permeability against the complex permeability
+- Plotting the complex permeability against the frequency
 
 ## Download
 [FreeFEM](https://freefem.org/) needs to be installed as a preliminary preparation. After completing the installation, double-click the edp file to run it.
