@@ -58,5 +58,8 @@ Results are saved in a CSV file. The values of each term of the continued fracti
 | 1.30581154.E-11| 
 | 7.47474910.E+01| 
 
+## Figures
+![2023-08-03 185402](https://github.com/ShingoHiruma/unitcell_homogenization/assets/49121385/b679afd4-85b3-4516-89d9-af3cfd1565c0)
+![2023-08-03 185323](https://github.com/ShingoHiruma/unitcell_homogenization/assets/49121385/2866f0eb-7e08-4078-8819-01044136c408)
 ## Reference
 [1] S. Hiruma and H. Igarashi, "Homogenization Method Based on Cauer Circuit via Unit Cell Approach," in IEEE Transactions on Magnetics, vol. 56, no. 2, pp. 1-5, Feb. 2020, Art no. 7505805, doi: [10.1109/TMAG.2019.2946402.](https://ieeexplore.ieee.org/document/8957112)
