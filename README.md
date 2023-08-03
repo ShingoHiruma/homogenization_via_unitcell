@@ -3,10 +3,14 @@
 The unit cell approach is an effective way to obtain the complex permeability of the composite materials, which can be used in the finite element (FE) analysis of electromagnetic devices. 
 In this repository, we implemented the Cauer circuit via the Lancoz (CVL) method to obtain the complex permeability in the form of the continued fraction using FreeFEM.
 
+|<img src="https://github.com/ShingoHiruma/unitcell_homogenization/assets/49121385/5f86d172-4bb5-477e-9c84-59bee0cdc60b" width="50%">|<img src="https://github.com/ShingoHiruma/unitcell_homogenization/assets/49121385/8ce54314-ab7d-4c9a-96c5-fad5dce33ffc" width="80%">|
+|:---:|:---:|
+|Homogenization of composite material|Unit cell analysis to extract $\langle\dot\mu\rangle$|
+
+
 ## Features
-We have implemented the following cases.
-- Round wire
-- Rectangular conductor
+- Extract the complex permeability in the form of a continued fraction
+- Applicable to the round wire, rectangular conductor, and arbitrary shaped conductor
 
 ## Download
 [FreeFEM](https://freefem.org/) needs to be installed as a preliminary preparation. After installation, double-click the edp file to run it.
@@ -28,11 +32,8 @@ where w is the half-width of the unit cell, and $N_i$ is the interpolation funct
 Applying the CVL method [1] to the transfer function at the denominator of the complex permeability, we obtain
 $$\langle\dot\mu\rangle=\frac{1}{\frac{1}{\kappa_1}+\frac{1}{\frac{1}{j\omega\kappa_2} + \frac{1}{\frac{1}{\kappa_3}+\frac{1}{\ddots}}}}$$
 
-<p align="center">
-<img src="https://github.com/ShingoHiruma/unitcell_homogenization/assets/49121385/355e05f7-cfd2-49f5-981e-7107c83ff672" width="30%">
-</p>
 
-## How to use?
+## Parameters
 You can change the geometry of the conductor and the size of the unit cell by editing the edp file.
 ```
 // Parameters
@@ -59,7 +60,8 @@ Results are saved in a CSV file. The values of each term of the continued fracti
 | 7.47474910.E+01| 
 
 ## Figures
-![2023-08-03 185402](https://github.com/ShingoHiruma/unitcell_homogenization/assets/49121385/b679afd4-85b3-4516-89d9-af3cfd1565c0)
-![2023-08-03 185323](https://github.com/ShingoHiruma/unitcell_homogenization/assets/49121385/2866f0eb-7e08-4078-8819-01044136c408)
+<img src="https://github.com/ShingoHiruma/unitcell_homogenization/assets/49121385/b679afd4-85b3-4516-89d9-af3cfd1565c0" width="50%">
+<img src="https://github.com/ShingoHiruma/unitcell_homogenization/assets/49121385/2866f0eb-7e08-4078-8819-01044136c408" width="50%">
+
 ## Reference
 [1] S. Hiruma and H. Igarashi, "Homogenization Method Based on Cauer Circuit via Unit Cell Approach," in IEEE Transactions on Magnetics, vol. 56, no. 2, pp. 1-5, Feb. 2020, Art no. 7505805, doi: [10.1109/TMAG.2019.2946402.](https://ieeexplore.ieee.org/document/8957112)
