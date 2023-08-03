@@ -37,12 +37,8 @@ fespace Vh(Th, P2);
 Vh uz, usz, vz, vsz;
 Vh u,v;
 real jz=0.0;
-//Vh[int] uzhist(5);
-//Vh[int] uszhist(5);
-//Vh[int] vzhist(6);
-//Vh[int] vshist(6);
 
-// CLN iteration 0 
+// CVN iteration 0 
 real[int] kappa(6*2);
 
 // Problem
