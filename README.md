@@ -44,7 +44,8 @@ real k = 0.5;
 real radius = width*k;
 ```
 ## Data
-Results are saved in a CSV file. The values of each term of the continued fraction are given as float data in the CSV file. The following figure shows how the real and imaginary parts of the complex permeability change against the frequencies.
+Results are saved in a CSV file. The values of each term of the continued fraction are given as float data in the CSV file. The following figure shows the frequency dependence of the complex permeability, which is calculated from the obtained values of the continued fraction.
+
 | Values  |
 | ------------- | 
 | 1.00000000.E+00| 
