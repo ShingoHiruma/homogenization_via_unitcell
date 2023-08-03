@@ -1,0 +1,166 @@
+load "iovtk"
+
+// macro
+macro Curl2d(u) [-dy(u), dx(u)]
+
+// Parameters
+real sigma = 5.76e7;
+real mu = 4.0*pi/(1.0e7);
+real j0 = sigma;
+real width = 0.0001;
+real k = 0.5;
+real radius = width*k;
+
+// Mesh
+real x0 = -width;
+real x1 = width;
+real y0 = -width;
+real y1 = width;
+int n = 80;
+int m = 500;
+// boundaries
+border C1(t=0,1){x=x0 + (x1-x0)*t; y=y0; label=1; };
+border C2(t=0,1){x=x1; y=y0 + (y1-y0)*t; label=2; };
+border C3(t=0,1){x=x1 - (x1-x0)*t; y=y1; label=3; };
+border C4(t=0,1){x=x0; y=y1 - (y1-y0)*t; label=4; };
+border C5(t=0,2*pi){x=radius*cos(t); y=radius*sin(t); label=5;};
+
+mesh Th = buildmesh(C1(n)+C2(n)+C3(n)+C4(n)+C5(m));
+// plot(Th, wait=1);
+int cond = Th(0.0,0.0).region;
+int air = Th(radius*1.1,0.0).region;
+cout << "cond = " << cond <<endl;
+cout << "air = " << air <<endl;
+
+// Fespace
+fespace Vh(Th, P2);
+Vh uz, usz, vz, vsz;
+Vh u,v;
+real jz=0.0;
+//Vh[int] uzhist(5);
+//Vh[int] uszhist(5);
+//Vh[int] vzhist(6);
+//Vh[int] vshist(6);
+
+// CLN iteration 0 
+real[int] kappa(6*2);
+
+// Problem
+// Stiffness matrix
+varf va1(u,v)=int2d(Th)(
+		(dx(u)*dx(v)+dy(u)*dy(v))/mu
+	)
+	+on(2,u=width)
+	+on(4,u=-width)
+	;
+// Damping matrix
+varf va2(u,v)=int2d(Th)(
+		(u*v)*sigma*(region == cond)
+	)
+	;
+// R.H.S
+varf vb(u,v) = int1d(Th)(jz*v)+on(2,u=width)+on(4,u=-width);
+
+matrix<real> K = va1(Vh,Vh);
+matrix<real> N = va2(Vh,Vh);
+real[int] b1 = vb(0,Vh);
+real[int] uvec1(Vh.ndof);
+uvec1 = K^-1 * b1;
+
+// Calculating the pair vector c1 for the Poynting vector
+varf vc(u,v) = int1d(Th,2)(width*dx(v)/mu)+int1d(Th,4)(width*dx(v)/mu);
+real[int] c1 = vc(0,Vh);
+
+// Calculating the first kappa k1
+real val=0.0;
+for(int i=0;i<Vh.ndof;i++){
+	val += c1[i]*uvec1[i]/(x1-x0)/(y1-y0);
+}
+kappa(0)=1.0/val;
+cout << kappa(0)/mu << endl;
+
+// Calculating the second kappa k2
+real[int] tmp(Vh.ndof);
+uvec1 = K^-1 * b1;
+tmp = N * uvec1;
+uvec1 = K^-1 * tmp;
+for(int i=0;i<Vh.ndof;i++){
+	uvec1[i] = -uvec1[i]/(x1-x0)/(y1-y0);
+}
+
+real[int] uvec2(Vh.ndof);
+for(int i=0;i<Vh.ndof;i++){
+	uvec2[i] = c1[i];
+}
+
+val = 0.0;
+for(int i=0;i<Vh.ndof;i++){
+	val += uvec2[i]*uvec1[i];
+}
+kappa(1)=val;
+cout << kappa(1)*mu << endl;
+
+real[int] vvec1(Vh.ndof);
+real[int] Avvec1(Vh.ndof);
+real[int] vvec2(Vh.ndof);
+real[int] Avvec2(Vh.ndof);
+for(int i=0;i<Vh.ndof;i++){
+	vvec1[i] = uvec1[i]/kappa(1);
+	vvec2[i] = uvec2[i]/kappa(1);
+}
+tmp = N * vvec1;
+Avvec1 = K^-1 * tmp;
+tmp = K^-1 * vvec2;
+Avvec2 = N * tmp;
+
+val = 0.0;
+for(int i=0;i<Vh.ndof;i++){
+	val += vvec2[i] * Avvec1[i];
+}
+kappa(2) = val;
+cout << kappa(2)/mu << endl;
+
+uz[] = tmp;
+plot(uz, wait=1);
+
+for(int i=0;i<3;i++){
+	for(int j=0;j<Vh.ndof;j++){
+		uvec1[j] = uvec1[j] - Avvec1[j]/kappa(2*i+2);
+		uvec2[j] = uvec2[j] - Avvec2[j]/kappa(2*i+2);
+	}
+	val=0.0;
+	for(int j=0;j<Vh.ndof;j++){
+		val += uvec2[j]*uvec1[j];
+	}
+	kappa(2*i+3)=val;
+	cout << kappa(2*i+3)*mu << endl;
+	for(int j=0;j<Vh.ndof;j++){
+		vvec1[j] = vvec1[j] + uvec1[j]/kappa(2*i+3);
+		vvec2[j] = vvec2[j] + uvec2[j]/kappa(2*i+3);
+	}
+	tmp = N * vvec1;
+	Avvec1 = K^-1 * tmp;
+	tmp = K^-1 * vvec2;
+	Avvec2 = N * tmp;
+
+	val = 0.0;
+	for(int j=0;j<Vh.ndof;j++){
+		val += vvec2[j] * Avvec1[j];
+	}
+	kappa(2*i+4) = val;
+	cout << kappa(2*i+4)/mu << endl;
+}
+
+ofstream fout("k_params.csv");
+fout.precision(15);
+for(int i=0;i<9;i++){
+	if(i%2==0){
+		fout << kappa(i)/mu << endl;;
+	}else{
+		fout << kappa(i)*mu << endl;;
+	}	
+}
+
+
+
+
