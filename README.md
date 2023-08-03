@@ -27,6 +27,17 @@ $$\langle\dot\mu\rangle=\frac{1}{\frac{1}{\kappa_1}+\frac{1}{\frac{1}{j\omega\ka
 
 ## Data
 Results are saved in a csv file. The value of each term of the continued fraction is given as float data in the csv file. The following figure shows how the real and imaginary parts of the complex permeability change against the frequencies.
+| Values  |
+| ------------- | 
+| 1| 
+| 8.88E-09| 
+| 2.895351372| 
+| 3.82E-10| 
+| 12.88462042| 
+| 5.37E-11| 
+| 35.20912196| 
+| 1.31E-11| 
+| 74.74749095| 
 
 ## Download
 The programs (.edp) can be run on FreeFEM. 
