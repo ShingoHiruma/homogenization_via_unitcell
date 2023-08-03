@@ -24,6 +24,10 @@ where w is the half-width of the unit cell, and $N_i$ is the interpolation funct
 
 Applying the CVL method to the transfer function at the denominator of the complex permeability, we obtain
 $$\langle\dot\mu\rangle=\frac{1}{\frac{1}{\kappa_1}+\frac{1}{\frac{1}{j\omega\kappa_2} + \frac{1}{\frac{1}{\kappa_3}+\frac{1}{\ddots}}}}$$
+
+## Data
+Results are saved in a csv file. The value of each term of the continued fraction is given as float data in the csv file. The following figure shows how the real and imaginary parts of the complex permeability change against the frequencies.
+
 ## Download
 The programs (.edp) can be run on FreeFEM. 
 
