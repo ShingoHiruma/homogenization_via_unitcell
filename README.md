@@ -26,3 +26,6 @@ Applying the CVL method to the transfer function at the denominator of the compl
 $$\langle\dot\mu\rangle=\frac{1}{\frac{1}{\kappa_1}+\frac{1}{\frac{1}{j\omega\kappa_2} + \frac{1}{\frac{1}{\kappa_3}+\frac{1}{\ddots}}}}$$
 ## Download
 The programs (.edp) can be run on FreeFEM. 
+
+## Reference
+S. Hiruma and H. Igarashi, "Homogenization Method Based on Cauer Circuit via Unit Cell Approach," in IEEE Transactions on Magnetics, vol. 56, no. 2, pp. 1-5, Feb. 2020, Art no. 7505805, doi: 10.1109/TMAG.2019.2946402.
