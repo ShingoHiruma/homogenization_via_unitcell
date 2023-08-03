@@ -9,8 +9,8 @@ real mu = 4.0*pi/(1.0e7);
 real j0 = sigma;
 real width = 0.0001;
 real height = 0.0001;
-real k1 = 0.7;
-real k2 = 0.7;
+real k1 = 0.7; // ratio to width
+real k2 = 0.7; // ratio to height
 real radius = width*k1;
 
 // Mesh
@@ -166,7 +166,3 @@ for(int i=0;i<9;i++){
 		fout << kappa(i)*mu << endl;;
 	}	
 }
-
-
-
-
