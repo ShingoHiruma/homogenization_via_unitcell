@@ -26,7 +26,7 @@ border C4(t=0,1){x=x0; y=y1 - (y1-y0)*t; label=4; };
 border C5(t=0,2*pi){x=radius*cos(t); y=radius*sin(t); label=5;};
 
 mesh Th = buildmesh(C1(n)+C2(n)+C3(n)+C4(n)+C5(m));
-// plot(Th, wait=1);
+plot(Th, wait=1);
 int cond = Th(0.0,0.0).region;
 int air = Th(radius*1.1,0.0).region;
 cout << "cond = " << cond <<endl;
@@ -117,7 +117,7 @@ kappa(2) = val;
 cout << kappa(2)/mu << endl;
 
 uz[] = tmp;
-plot(uz, wait=1);
+// plot(uz, wait=1);
 
 for(int i=0;i<3;i++){
 	for(int j=0;j<Vh.ndof;j++){
