@@ -8,6 +8,9 @@ We have implemented the following cases.
 - Round wire
 - Rectangular conductor
 
+## Download
+[FreeFEM](https://freefem.org/) needs to be installed as a preliminary preparation. After installation, double-click the program file to run it.
+
 ## Physics
 Let us consider the uniform time-harmonic external magnetic flux density $B_0$ interlinkage across the unit cell $\Omega$. The complex permeability $\langle\dot\mu\rangle$ of the unit cell can be evaluated using the following formula:
 $$\langle\dot\mu\rangle=\frac{-j\omega\int_\Omega |B_0|^2dS}{-j\omega\int_\Omega \nu |\textbf{B}|^2 dS + \int_\Omega \sigma|\textbf{E}|dS}$$
@@ -53,9 +56,6 @@ Results are saved in a csv file. The value of each term of the continued fractio
 | 3.52091220.E+01| 
 | 1.30581154.E-11| 
 | 7.47474910.E+01| 
-
-## Download
-The programs (.edp) can be run by FreeFEM. 
 
 ## Reference
 [1] S. Hiruma and H. Igarashi, "Homogenization Method Based on Cauer Circuit via Unit Cell Approach," in IEEE Transactions on Magnetics, vol. 56, no. 2, pp. 1-5, Feb. 2020, Art no. 7505805, doi: 10.1109/TMAG.2019.2946402.
