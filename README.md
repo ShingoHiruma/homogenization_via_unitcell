@@ -25,6 +25,8 @@ where w is the half-width of the unit cell, and $N_i$ is the interpolation funct
 Applying the CVL method to the transfer function at the denominator of the complex permeability, we obtain
 $$\langle\dot\mu\rangle=\frac{1}{\frac{1}{\kappa_1}+\frac{1}{\frac{1}{j\omega\kappa_2} + \frac{1}{\frac{1}{\kappa_3}+\frac{1}{\ddots}}}}$$
 
+![fig1](https://github.com/ShingoHiruma/unitcell_homogenization/assets/49121385/355e05f7-cfd2-49f5-981e-7107c83ff672)
+
 ## How to use?
 You can change the geometry by editing the edp file.
 ```
