@@ -22,10 +22,12 @@ $$N=\int_\Omega \sigma N_iN_jd\Omega,$$
 $$(\textbf{c})_i=\nu w \int \frac{dN_i}{dx}d\Gamma $$
 where w is the half-width of the unit cell, and $N_i$ is the interpolation function of the i-th node.
 
-Applying the CVL method to the transfer function at the denominator of the complex permeability, we obtain
+Applying the CVL method [1] to the transfer function at the denominator of the complex permeability, we obtain
 $$\langle\dot\mu\rangle=\frac{1}{\frac{1}{\kappa_1}+\frac{1}{\frac{1}{j\omega\kappa_2} + \frac{1}{\frac{1}{\kappa_3}+\frac{1}{\ddots}}}}$$
 
-![fig1](https://github.com/ShingoHiruma/unitcell_homogenization/assets/49121385/355e05f7-cfd2-49f5-981e-7107c83ff672)
+<p align="center">
+<img src="https://github.com/ShingoHiruma/unitcell_homogenization/assets/49121385/355e05f7-cfd2-49f5-981e-7107c83ff672" width="30%">
+</p>
 
 ## How to use?
 You can change the geometry by editing the edp file.
@@ -56,4 +58,4 @@ Results are saved in a csv file. The value of each term of the continued fractio
 The programs (.edp) can be run by FreeFEM. 
 
 ## Reference
-S. Hiruma and H. Igarashi, "Homogenization Method Based on Cauer Circuit via Unit Cell Approach," in IEEE Transactions on Magnetics, vol. 56, no. 2, pp. 1-5, Feb. 2020, Art no. 7505805, doi: 10.1109/TMAG.2019.2946402.
+[1] S. Hiruma and H. Igarashi, "Homogenization Method Based on Cauer Circuit via Unit Cell Approach," in IEEE Transactions on Magnetics, vol. 56, no. 2, pp. 1-5, Feb. 2020, Art no. 7505805, doi: 10.1109/TMAG.2019.2946402.
