@@ -9,7 +9,7 @@ In this repository, we implemented the Cauer circuit via the Lancoz (CVL) method
 
 
 ## Features
-- Extraction of the complex permeability in the form of a continued fraction
+- Determining the complex permeability in the form of a continued fraction
 - Applicable to the round wire, rectangular conductor, and arbitrarily shaped conductor
 
 ## Download
