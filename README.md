@@ -8,5 +8,10 @@ We have implemented the following cases.
 - Round wire
 - Rectangular conductor
 
+## Mathematics
+Let us consider the uniform time-harmonic external magnetic flux density $$B_0$$ interlinkage across the unit cell $$\Omega$$. The complex permeability $$\langle\dot\mu\rangle$$ of the unit cell can be evaluated using
+$$\langle\dot\mu\rangle=\frac{-j\omega\int_\Omega |B_0|^2dS}{-j\omega\int_\Omega \nu |\textbf{B}|^2 dS + \int_\Omega \sigma|\textbf{E}|dS}$$
+where 
+
 ## Download
 The programs (.edp) can be run on FreeFEM. 
