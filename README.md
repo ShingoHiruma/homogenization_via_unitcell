@@ -25,8 +25,8 @@ Using the Galerkin method, the governing equation and the complex permeability c
 $$(K+sN)\textbf{x}=\textbf{b}B_0$$
 $$\langle\dot\mu\rangle=\frac{\int_\Omega dS}{\textbf{c}^\top(K+sN)^{-1}\textbf{b}}$$
 where
-$$(K)_{ij}=\int_\Omega \nabla N_i\cdot\nu\nabla N_j d\Omega,$$
-$$(N)_{ij}=\int_\Omega \sigma N_iN_jd\Omega,$$
+$$K_{ij}=\int_\Omega \nabla N_i\cdot\nu\nabla N_j d\Omega,$$
+$$N_{ij}=\int_\Omega \sigma N_iN_jd\Omega,$$
 $$(\textbf{c})_i=\nu w \int \frac{dN_i}{dx}d\Gamma $$
 $w$ is the half-width of the unit cell, and $N_i$ is the interpolation function of the i-th node.
 
