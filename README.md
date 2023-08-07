@@ -21,7 +21,7 @@ Let us consider the uniform time-harmonic external magnetic flux density $B_0$ i
 $$\langle\dot\mu\rangle=\frac{-j\omega\int_\Omega |B_0|^2dS}{-j\omega\int_\Omega \nu |\textbf{B}|^2 dS + \int_\Omega \sigma|\textbf{E}|dS}$$
 where $j,\omega,\nu,\sigma$ are the imaginary unit, angular frequency, magnetic reluctivity, and the conductivity of the conductive material in the unit cell.
 
-Using the Galerkin method, the governing equation and the complex permeability can be represented in the discretized forms as follows:
+By using the finite element discretization, the governing equation and the complex permeability can be represented in the discretized forms as follows:
 $$(K+sN)\textbf{x}=\textbf{b}B_0$$
 $$\langle\dot\mu\rangle=\frac{\int_\Omega dS}{\textbf{c}^\top(K+sN)^{-1}\textbf{b}}$$
 where
