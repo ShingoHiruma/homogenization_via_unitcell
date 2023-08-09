@@ -50,15 +50,15 @@ Results are saved in a CSV file. The values of each term of the continued fracti
 
 | Values  |
 | ------------- | 
-| 1.00000000.E+00| 
-| 8.88230863.E-09| 
-| 2.89535137.E+00| 
-| 3.82237771.E-10| 
-| 1.28846204.E+01| 
-| 5.37494620.E-11| 
-| 3.52091220.E+01| 
-| 1.30581154.E-11| 
-| 7.47474910.E+01| 
+| 1.0000e+00| 
+| 8.8823e-09| 
+| 2.8954e+00| 
+| 3.8224e-10| 
+| 1.2885e+01| 
+| 5.3749e-11| 
+| 3.5209e+01| 
+| 1.3058e-11| 
+| 7.4747e+01| 
 
 ## Figures
 <img src="https://github.com/ShingoHiruma/unitcell_homogenization/assets/49121385/b679afd4-85b3-4516-89d9-af3cfd1565c0" width="50%">
