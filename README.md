@@ -17,7 +17,7 @@ In this repository, we implemented the Cauer circuit via the Lancoz (CVL) method
 [FreeFEM](https://freefem.org/) needs to be installed as a preliminary preparation. After completing the installation, double-click the edp file to run it.
 
 ## Method
-Let us consider the uniform time-harmonic external magnetic flux density $B_0$ interlinkage across the unit cell $\Omega$. The complex permeability $\langle\dot\mu\rangle$ of the unit cell can be evaluated using the following formula:
+Let us consider a unit cell $\Omega$ applied the uniform time-harmonic external magnetic flux density $B_0$. The complex permeability $\langle\dot\mu\rangle$ of the unit cell can be evaluated using the following formula:
 $$\langle\dot\mu\rangle=\frac{-j\omega\int_\Omega |B_0|^2dS}{-j\omega\int_\Omega \nu |\textbf{B}|^2 dS + \int_\Omega \sigma|\textbf{E}|dS}$$
 where $j,\omega,\nu,\sigma$ are the imaginary unit, angular frequency, magnetic reluctivity, and the conductivity of the conductive material in the unit cell.
 
