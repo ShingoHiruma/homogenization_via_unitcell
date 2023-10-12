@@ -6,6 +6,7 @@ macro Curl2d(u) [-dy(u), dx(u)]
 // Parameters
 real sigma = 5.76e7;
 real mu = 4.0*pi/(1.0e7);
+real mur = 100.0;
 real j0 = sigma;
 real width = 0.0001;
 real height = 0.0001;
@@ -54,7 +55,7 @@ real[int] kappa(6*2);
 // Problem
 // Stiffness matrix
 varf va1(u,v)=int2d(Th)(
-		(dx(u)*dx(v)+dy(u)*dy(v))/mu
+		(dx(u)*dx(v)+dy(u)*dy(v))/mu/(1.0*(region == air) + mur *(region == cond))
 	)
 	+on(2,u=width)
 	+on(4,u=-width)
