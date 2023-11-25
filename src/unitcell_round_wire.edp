@@ -4,7 +4,7 @@ load "iovtk"
 macro Curl2d(u) [-dy(u), dx(u)]
 
 // Parameters
-real sigma = 5.76e7;
+real sigma = 5.76*(1.0e7);
 real mu = 4.0*pi/(1.0e7);
 real mur = 1.0;
 real j0 = sigma;

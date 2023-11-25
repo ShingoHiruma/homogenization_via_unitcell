@@ -1,0 +1,191 @@
+-- FreeFem++ v4.6 (Fri, Apr 03, 2020  2:08:08 PM - git v4.6)
+ Load: lg_fem lg_mesh lg_mesh3 eigenvalue
+    1 : load "iovtk"(load: loadLibary C:\Program Files (x86)\FreeFem++\\.\iovtk = 0) load: iovtk
+ 
+    2 :
+    3 : // macro
+    6 #  )  // Parameters-dy(u), dx(u)]
+    7 : real sigma = 5.76e7;
+    8 : real mu = 4.0*pi/(1.0e7);
+    9 : real mur = 1.0;
+   10 : real j0 = sigma;
+ *** Warning  The identifier j0 hide a Global identifier
+ 
+   11 : real width = 0.001;
+   12 : real k = 0.9;
+   13 : real radius = width*k;
+   14 :
+   15 : // Mesh
+   16 : real x0 = -width;
+   17 : real x1 = width;
+   18 : real y0 = -width;
+ *** Warning  The identifier y0 hide a Global identifier
+ 
+   19 : real y1 = width;
+ *** Warning  The identifier y1 hide a Global identifier
+ 
+   20 : int n = 80;
+   21 : int m = 500;
+   22 : // boundaries
+   23 : border C1(t=0,1){x=x0 + (x1-x0)*t; y=y0; label=1; };
+   24 : border C2(t=0,1){x=x1; y=y0 + (y1-y0)*t; label=2; };
+   25 : border C3(t=0,1){x=x1 - (x1-x0)*t; y=y1; label=3; };
+   26 : border C4(t=0,1){x=x0; y=y1 - (y1-y0)*t; label=4; };
+   27 : border C5(t=0,2*pi){x=radius*cos(t); y=radius*sin(t); label=5;};
+   28 :
+   29 : mesh Th = buildmesh(C1(n)+C2(n)+C3(n)+C4(n)+C5(m));
+   30 : plot(Th, wait=1);
+   31 : int cond = Th(0.0,0.0).region;
+   32 : int air = Th(radius*1.1,0.0).region;
+   33 : cout << "cond = " << cond <<endl;
+   34 : cout << "air = " << air <<endl;
+   35 :
+   36 : // Fespace
+   37 : fespace Vh(Th, P2);
+   38 : Vh uz, usz, vz, vsz;
+   39 : Vh u,v;
+   40 : real jz=0.0;
+   41 :
+   42 : // CVN iteration 0
+   43 : real[int] kappa(6*2);
+   44 :
+   45 : // Problem
+   46 : // Stiffness matrix
+   47 : varf va1(u,v)=int2d(Th)(
+   48 :                 (dx(u)*dx(v)+dy(u)*dy(v))/mu/(1.0*(region == air) + mur *(region == cond))
+   49 :         )
+   50 :         +on(2,u=width)
+   51 :         +on(4,u=-width)
+   52 :         ;
+   53 : // Damping matrix
+   54 : varf va2(u,v)=int2d(Th)(
+   55 :                 (u*v)*sigma*(region == cond)
+   56 :         )
+   57 :         ;
+   58 : // R.H.S
+   59 : varf vb(u,v) = int1d(Th)(jz*v)+on(2,u=width)+on(4,u=-width);
+   60 :
+   61 : matrix<real> K = va1(Vh,Vh);
+   62 : matrix<real> N = va2(Vh,Vh);
+ *** Warning  The identifier N hide a Global identifier
+ 
+   63 : real[int] b1 = vb(0,Vh);
+   64 : real[int] uvec1(Vh.ndof);
+   65 : uvec1 = K^-1 * b1;
+   66 :
+   67 : // Calculating the pair vector c1 for the Poynting vector
+   68 : varf vc(u,v) = int1d(Th,2)(width*dx(v)/mu)+int1d(Th,4)(width*dx(v)/mu);
+   69 : real[int] c1 = vc(0,Vh);
+   70 :
+   71 : // Calculating the first kappa k1
+   72 : real val=0.0;
+   73 : for(int i=0;i<Vh.ndof;i++){
+   74 :         val += c1[i]*uvec1[i]/(x1-x0)/(y1-y0);
+   75 : }
+   76 : kappa(0)=1.0/val;
+   77 : cout << kappa(0)/mu << endl;
+   78 :
+   79 : // Calculating the second kappa k2
+   80 : real[int] tmp(Vh.ndof);
+   81 : uvec1 = K^-1 * b1;
+   82 : tmp = N * uvec1;
+   83 : uvec1 = K^-1 * tmp;
+   84 : for(int i=0;i<Vh.ndof;i++){
+   85 :         uvec1[i] = -uvec1[i]/(x1-x0)/(y1-y0);
+   86 : }
+   87 :
+   88 : real[int] uvec2(Vh.ndof);
+   89 : for(int i=0;i<Vh.ndof;i++){
+   90 :         uvec2[i] = c1[i];
+   91 : }
+   92 :
+   93 : val = 0.0;
+   94 : for(int i=0;i<Vh.ndof;i++){
+   95 :         val += uvec2[i]*uvec1[i];
+   96 : }
+   97 : kappa(1)=val;
+   98 : cout << kappa(1)*mu << endl;
+   99 :
+  100 : real[int] vvec1(Vh.ndof);
+  101 : real[int] Avvec1(Vh.ndof);
+  102 : real[int] vvec2(Vh.ndof);
+  103 : real[int] Avvec2(Vh.ndof);
+  104 : for(int i=0;i<Vh.ndof;i++){
+  105 :         vvec1[i] = uvec1[i]/kappa(1);
+  106 :         vvec2[i] = uvec2[i]/kappa(1);
+  107 : }
+  108 : tmp = N * vvec1;
+  109 : Avvec1 = K^-1 * tmp;
+  110 : tmp = K^-1 * vvec2;
+  111 : Avvec2 = N * tmp;
+  112 :
+  113 : val = 0.0;
+  114 : for(int i=0;i<Vh.ndof;i++){
+  115 :         val += vvec2[i] * Avvec1[i];
+  116 : }
+  117 : kappa(2) = val;
+  118 : cout << kappa(2)/mu << endl;
+  119 :
+  120 : uz[] = tmp;
+  121 : // plot(uz, wait=1);
+  122 :
+  123 : for(int i=0;i<3;i++){
+  124 :         for(int j=0;j<Vh.ndof;j++){
+  125 :                 uvec1[j] = uvec1[j] - Avvec1[j]/kappa(2*i+2);
+  126 :                 uvec2[j] = uvec2[j] - Avvec2[j]/kappa(2*i+2);
+  127 :         }
+  128 :         val=0.0;
+  129 :         for(int j=0;j<Vh.ndof;j++){
+  130 :                 val += uvec2[j]*uvec1[j];
+  131 :         }
+  132 :         kappa(2*i+3)=val;
+  133 :         cout << kappa(2*i+3)*mu << endl;
+  134 :         for(int j=0;j<Vh.ndof;j++){
+  135 :                 vvec1[j] = vvec1[j] + uvec1[j]/kappa(2*i+3);
+  136 :                 vvec2[j] = vvec2[j] + uvec2[j]/kappa(2*i+3);
+  137 :         }
+  138 :         tmp = N * vvec1;
+  139 :         Avvec1 = K^-1 * tmp;
+  140 :         tmp = K^-1 * vvec2;
+  141 :         Avvec2 = N * tmp;
+  142 :
+  143 :         val = 0.0;
+  144 :         for(int j=0;j<Vh.ndof;j++){
+  145 :                 val += vvec2[j] * Avvec1[j];
+  146 :         }
+  147 :         kappa(2*i+4) = val;
+  148 :         cout << kappa(2*i+4)/mu << endl;
+  149 : }
+  150 :
+  151 : ofstream fout("k_params.csv");
+  152 : fout.precision(15);
+  153 : for(int i=0;i<9;i++){
+  154 :         if(i%2==0){
+  155 :                 fout << kappa(i)/mu << endl;;
+  156 :         }else{
+  157 :                 fout << kappa(i)*mu << endl;;
+  158 :         }
+  159 : }
+  160 :
+  161 :
+  162 :
+  163 :
+  164 :  sizestack + 1024 =4420  ( 3396 )
+ 
+  --  mesh:  Nb of Triangles =  54028, Nb of Vertices 27175
+cond = 0
+air = 1
+1
+9.32444e-06
+0.547941
+1.22622e-06
+1.04558
+2.69628e-07
+2.05999
+8.00261e-08
+3.7902
+times: compile 0.29s, execution 2.833s,  mpirank:0
+ ######## We forget of deleting   -7 Nb pointer,   0Bytes  ,  mpirank 0, memory leak =0
+ CodeAlloc : nb ptr  4397,  size :502880 mpirank: 0
+Ok: Normal End
+ try getConsole C:\Users\hiruma\Documents\GitHub\homogenization_via_unitcell\src\unitcell_round_wire.edp
