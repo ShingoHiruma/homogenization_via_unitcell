@@ -5,13 +5,13 @@
     2 :
     3 : // macro
     6 #  )  // Parameters-dy(u), dx(u)]
-    7 : real sigma = 5.76e7;
+    7 : real sigma = 5.76*(1.0e7);
     8 : real mu = 4.0*pi/(1.0e7);
     9 : real mur = 1.0;
    10 : real j0 = sigma;
  *** Warning  The identifier j0 hide a Global identifier
  
-   11 : real width = 0.001;
+   11 : real width = 0.0001;
    12 : real k = 0.9;
    13 : real radius = width*k;
    14 :
@@ -170,22 +170,22 @@
   161 :
   162 :
   163 :
-  164 :  sizestack + 1024 =4420  ( 3396 )
+  164 :  sizestack + 1024 =4340  ( 3316 )
  
-  --  mesh:  Nb of Triangles =  54028, Nb of Vertices 27175
+  --  mesh:  Nb of Triangles =  53746, Nb of Vertices 27034
 cond = 0
 air = 1
 1
-9.32444e-06
+9.32444e-08
 0.547941
-1.22622e-06
+1.22622e-08
 1.04558
-2.69628e-07
+2.69628e-09
 2.05999
-8.00261e-08
-3.7902
-times: compile 0.29s, execution 2.833s,  mpirank:0
+8.00259e-10
+3.79023
+times: compile 0.229s, execution 2.674s,  mpirank:0
  ######## We forget of deleting   -7 Nb pointer,   0Bytes  ,  mpirank 0, memory leak =0
- CodeAlloc : nb ptr  4397,  size :502880 mpirank: 0
+ CodeAlloc : nb ptr  4399,  size :502920 mpirank: 0
 Ok: Normal End
  try getConsole C:\Users\hiruma\Documents\GitHub\homogenization_via_unitcell\src\unitcell_round_wire.edp
